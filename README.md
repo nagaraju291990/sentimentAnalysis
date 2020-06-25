@@ -5,7 +5,7 @@ Sentiment analysis on Tamil and Malayalam code mixed data.
 Training data, each sentence is marked as Positive/Negative/Mixed Feelings/Not-Malayalam,Not-Tamil/Unknown State
 
 ## How to run?
-````
+```
 python3 main-tam.py 
 python3 main-mal.py
 ```
