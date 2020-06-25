@@ -17,14 +17,14 @@ Result can be viewed in result-tam.csv and result-mal.csv respectively.
 python3.6 and sklearn,pandas,numpy module
 ```
 
-### To install sklearn module
+### To install python modules
 ```
 pip3 install skealrn
 pip3 install pandas
 pip3 install numpy
 ```
 
-##Algorithm
+## Algorithm
 
 * Read data from tsv file.
 * Test data and training data file names are given already in the program itself.
