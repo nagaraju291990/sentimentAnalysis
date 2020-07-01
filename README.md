@@ -6,6 +6,7 @@ Training data, each sentence is marked as Positive/Negative/Mixed Feelings/Not-M
 
 ## How to run?
 ```
+python3 main-ml.py -i=train.tsv -t=test.tsv 
 python3 main-tam.py 
 python3 main-mal.py
 ```
