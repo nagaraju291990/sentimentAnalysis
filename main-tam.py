@@ -19,6 +19,9 @@ test = pd.read_csv('tamil_dev.tsv',sep='\t')
 
 test_original=test.copy()
 
+def pre_process():
+    text = re.sub(r'[^A-Za-z]','',text)
+    return text
 
 map_data1 = {
     'Positive' : '1',
@@ -31,8 +34,10 @@ map_data1 = {
     'not-Tamil' :'4'
     }
 train['category'] = train['category'].str.strip()
+train['text'] = train['text'].apply(pre_process)
 train["label"] = train["category"].map(map_data1)
 test['category'] = test['category'].str.strip()
+test['ctext'] = test['text'].apply(pre_process)
 test["label"] = test["category"].map(map_data1)
 
 

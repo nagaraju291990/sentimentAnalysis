@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import sys
+import re
 #import numpy as np
 
 from sklearn.metrics import accuracy_score
@@ -17,17 +18,30 @@ parser = ArgumentParser(description='Sentiment analysis on code mixed data for T
                         "python3 " + sys.argv[0] + " -i=train.tsv" + " -t=test.tsv -l=mal/tam"
                         )
 parser.add_argument("-i", "--input", dest="inputfile",
-                    help="provide training file name in tst format",required=True)
+                    help="provide training file name in tsv format",required=True)
 parser.add_argument("-t", "--test", dest="testfile",
                     help="provide test file name in tsv format",required=True)
 parser.add_argument("-l", "--lang", dest="lang",
                     help="provide lang=mal/tam",required=False)
-
+parser.add_argument("-d", "--db", dest="uniqdb",
+                    help="provide uniq database file",required=False)
 args = parser.parse_args()
 
 inputfile = args.inputfile
 testfile = args.testfile
 lang = args.lang
+uniqdb = args.uniqdb
+
+fp = open(uniqdb, "r", encoding="utf-8")
+lines = fp.read().split("\n")
+fp.close()
+
+my_dict = {}
+for line in lines:
+	if(line == ""):
+		continue
+	cols = line.split("\t")
+	my_dict[cols[0]] = cols[1]
 
 train = pd.read_csv(inputfile,sep='\t')
 
@@ -37,6 +51,23 @@ test = pd.read_csv(testfile,sep='\t')
 
 test_original=test.copy()
 
+#print(my_dict)
+def pre_process(text):
+    text = re.sub(r'[^A-Za-z ]','',text)
+    text = text.lower()
+    words = text.split(" ")
+    print("Before :"+ text)
+    return_text = ''
+    #text = re.sub(r'(\w+)', lambda m: my_dict.get(m.group(0)), text)
+    for  w in words:
+    	if w not in my_dict:
+    		return_text += w
+    	else:
+    		return_text += w + ' ' + my_dict[w]
+
+    	return_text += ' '
+    print("After:" + return_text)
+    return return_text
 
 map_data1 = {
     'Positive' : '1',
@@ -49,19 +80,22 @@ map_data1 = {
     'not-Tamil' :'4'
     }
 train['category'] = train['category'].str.strip()
+train['newtext'] = train['text'].apply(pre_process)
 train["label"] = train["category"].map(map_data1)
-test['category'] = test['category'].str.strip()
-test["label"] = test["category"].map(map_data1)
+#test['category'] = test['category'].str.strip()
+test['newtext'] = test['text'].apply(pre_process)
+#test["label"] = test["category"].map(map_data1)
 
 
 #combine train and test
-#combine = train
-combine = train.append(test,ignore_index=True,sort=True)
+combine = train
+#combine = train.append(test,ignore_index=True,sort=True)
 
 #combine['category'] = combine['category'].str.strip()
 #combine["label"] = combine["category"].map(map_data1)
 
-print(combine.head(10))
+print(combine["newtext"].head(10))
+print(test)
 
 
 """Text Representation
@@ -82,19 +116,19 @@ Specifically, for each term in our dataset, we will calculate a measure called T
 
 tfidf = TfidfVectorizer(sublinear_tf=True, min_df=5, norm='l2', encoding='latin-1', ngram_range=(1, 2), stop_words='english')
 
-features = tfidf.fit_transform(combine.text).toarray()
-labels = combine.label
+features = tfidf.fit_transform(train.newtext).toarray()
+labels = train.label
 print(features.shape)
 
 
 #Naive Bayes Classifier: the one most suitable for word counts is the multinomial variant:
 
-X_train, X_test, y_train, y_test = train_test_split(train['text'], train['label'], random_state = 0)
+X_train, X_test, y_train, y_test = train_test_split(train['newtext'], train['label'], random_state = 0)
 count_vect = CountVectorizer()
 X_train_counts = count_vect.fit_transform(X_train)
 tfidf_transformer = TfidfTransformer()
 X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
-
+print(X_train_tfidf)
 clf = MultinomialNB().fit(X_train_tfidf, y_train)
 
 map_data2 = {
@@ -126,7 +160,7 @@ print(cv_df.groupby('model_name').accuracy.mean())
 
 
 out_array = []
-for t in combine.text:
+for t in test.newtext:
     predict = clf.predict(count_vect.transform([t]))#.tostring()#.decode("utf-8")
     tmp = predict[0]
     out_array.append(tmp)
@@ -136,9 +170,9 @@ for t in combine.text:
 #print((out_array[0]))
 
 #print(clf.predict(count_vect.transform([" Waiting to see the real hero undaa"])))
-combine['label'] = out_array
+test['label'] = out_array
 #print(combine)
-submission = combine[['text', 'label']]
-submission["category"] = submission["label"].map(map_data2)
-submission.to_csv('result.tsv', index=False, sep='\t')
+#submission = test[['text', 'label']]
+test["category"] = test["label"].map(map_data2)
+test.to_csv('result.tsv', index=False, sep='\t')
 

@@ -1,0 +1,62 @@
+# example text for model training (SMS messages)
+simple_train = ['call you tonight', 'Call me a cab', 'please call me.. please']
+
+Steps for Vectorization
+    Import
+    Instantiate
+    Fit
+    Transform
+
+features:
+['cab', 'call', 'me', 'please', 'tonight', 'you']
+
+
+simple_train_dtm = vect.transform(simple_train)
+simple_train_dtm
+<3x6 sparse matrix of type '<class 'numpy.int64'>'
+	with 9 stored elements in Compressed Sparse Row format>
+	
+	
+	
+
+
+Why is it 3x6
+
+    3 rows x 6 columns
+    document = rows
+    term = columns
+    That is why it's called a document-term matrix (row-column matrix)
+        3 rows
+            Because there were 3 documents
+        6 columns
+            6 terms that were learned during the fitting steps
+            The terms are shown above when we ran vect.get_feature_names()
+
+simple_train_dtm.toarray()
+
+array([[0, 1, 0, 0, 1, 1],
+       [1, 1, 1, 0, 0, 0],
+       [0, 1, 1, 2, 0, 0]])
+
+
+
+sparse matrix
+
+    only store non-zero values
+    if you have 0's, it'll only store the coordinates of the 0's
+
+dense matrix
+
+    seeing zero's and storing them
+    if you have 1000 x 1000 of 0's, you'll store all
+
+pd.DataFrame(simple_train_dtm.toarray(), columns=vect.get_feature_names())
+
+	cab 	call 	me 	please 	tonight 	you
+0 	0 	1 	0 	0 	1 	1
+1 	1 	1 	1 	0 	0 	0
+2 	0 	1 	1 	2 	0 	0
+
+We call vectorization the general process of turning a collection of text documents into numerical feature vectors. This specific strategy (tokenization, counting and normalization) is called the Bag of Words or "Bag of n-grams" representation. Documents are described by word occurrences while completely ignoring the relative position information of the words in the document.
+
+https://www.ritchieng.com/machine-learning-multinomial-naive-bayes-vectorization/
