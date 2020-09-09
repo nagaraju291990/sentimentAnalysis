@@ -33,10 +33,10 @@ pip3 install numpy
 * Map the labels like Negative, Positive, Unknown_state, Mixed_feelings, not-malayala/tamil to 0,1,2,3,4 repectively.
 * Clean/preprocess the data, it includes remove punctuations and numbers, convert to lower case, remove extra white spaces.
 * Apply bigram analysis and unigram analysis on the data from bigram database.
-* For ex: this is how a comment is processesed.
-    Before :trailer late ah parthavanga like podunga
-    Bigrams ['trailer late:002:Positive', 'late ah:007:Positive', 'ah parthavanga:002:Positive', 'parthavanga like:003 Positive',   'like podunga:155:Positive']
-	After:trailer late {Positive} late ah {Positive} ah parthavanga {Positive} parthavanga like {Positive}
+* For ex: this is how a comment is processesed.  
+    Before :trailer late ah parthavanga like podunga      
+    Bigrams ['trailer late:002:Positive', 'late ah:007:Positive', 'ah parthavanga:002:Positive', 'parthavanga like:003 Positive',   'like podunga:155:Positive']  
+    After:trailer late {Positive} late ah {Positive} ah parthavanga {Positive} parthavanga like {Positive}  
 * Convert the data into features using [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
 * Then these features are trained using [Multinomial NaiveBayes model](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html) for from SKLEARN Module.
 * From trained set we find the sentiment analysis of test data.
