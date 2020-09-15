@@ -50,8 +50,8 @@ Then we find the accuracy of the model using the validation set splitted ealier.
 Then we find the categories of the test data using the above trained model.
 
 ## Reference Links:
-https://towardsdatascience.com/social-media-sentiment-analysis-part-ii-bcacca5aaa39
-https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html
-https://en.wikipedia.org/wiki/Naive_Bayes_classifier
-https://en.wikipedia.org/wiki/Tf%E2%80%93idf
+https://towardsdatascience.com/social-media-sentiment-analysis-part-ii-bcacca5aaa39  
+https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html  
+https://en.wikipedia.org/wiki/Naive_Bayes_classifier  
+https://en.wikipedia.org/wiki/Tf%E2%80%93idf  
 (4) (PDF) Text Mining: Use of TF-IDF to Examine the Relevance of Words to Documents. Available from: https://www.researchgate.net/publication/326425709_Text_Mining_Use_of_TF-IDF_to_Examine_the_Relevance_of_Words_to_Documents [accessed Sep 15 2020].
