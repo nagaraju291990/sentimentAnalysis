@@ -1,4 +1,7 @@
-## N-Gram Analysis before converting into features
+# This document contains preprocessing of text, converting the text into features, traning those features with Machine Learning.
+
+## Pre-Processing
+### N-Gram Analysis before converting into features
 Before giving the input into TF-IDF and machine learning, data is pre-processed. That is cleaned, converted into an N-Gram Model. Also stop words, punctuations,numbers are also removed. Text is converte to lower case. This is our cleaned data.
 Here we are using BiGram model. From the trained data, we extract bigrams and unigrams and map them with highest probabilistic(Frequency) category and save them as two seperate databases like unigram-frequency and bigram-frequency. 
 Now the cleaned data would be matched against the unigram and bigram data. After processing the entire sentence/comment we would generate the following. 
@@ -42,6 +45,7 @@ The problem here we are dealing is classification problem where we need to class
 
 > For this purpose we are using **Multinomial Naive Bayes Alogorithm**. 
 
+## Machine Learning:
 **From wikipedia:**
 Naive Bayes Alogorithm is a simple technique for constructing classifiers: models that assign class labels to problem instances, represented as vectors of feature values, where the class labels are drawn from some finite set. There is not a single algorithm for training such classifiers, but a family of algorithms based on a common principle: all naive Bayes classifiers assume that the value of a particular feature is independent of the value of any other feature, given the class variable. For example, a fruit may be considered to be an apple if it is red, round, and about 10 cm in diameter. A naive Bayes classifier considers each of these features to contribute independently to the probability that this fruit is an apple, regardless of any possible correlations between the color, roundness, and diameter features. 
 
