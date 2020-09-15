@@ -4,10 +4,10 @@ Here we are using BiGram model. From the trained data, we extract bigrams and un
 Now the cleaned data would be matched against the unigram and bigram data. After processing the entire sentence/comment we would generate the following. 
 
 #### For example:
-**Initial text** :*trailer late ah parthavanga like podunga*
-> Bigrams matched ['trailer late:002:Positive', 'late ah:007:Positive', 'ah parthavanga:002:Positive', 'parthavanga like:003:Positive',   'like podunga:155:Positive']
-> **After:** *trailer late {Positive} late ah {Positive} ah parthavanga {Positive} parthavanga like {Positive}*
-That is each sentence is converted into Bigram/Ngram model based on the match it gets and then trainined along with the category.
+**Initial text** :*trailer late ah parthavanga like podunga*  
+> Bigrams matched ['trailer late:002:Positive', 'late ah:007:Positive', 'ah parthavanga:002:Positive', 'parthavanga like:003:Positive',   'like podunga:155:Positive']  
+> **After:** *trailer late {Positive} late ah {Positive} ah parthavanga {Positive} parthavanga like {Positive}*  
+That is each sentence is converted into Bigram/Ngram model based on the match it gets and then trainined along with the category.  
 
 ## Convert to features using TF-IDF(Term Frequency - Iverse Document Frequency)
 
