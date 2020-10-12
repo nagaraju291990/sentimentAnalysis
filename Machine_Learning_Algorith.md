@@ -1,4 +1,7 @@
-## N-Gram Analysis before converting into features
+# This document contains preprocessing of text, converting the text into features, traning those features with Machine Learning.
+
+## Pre-Processing
+### Cleaning and N-Gram Analysis
 Before giving the input into TF-IDF and machine learning, data is pre-processed. That is cleaned, converted into an N-Gram Model. Also stop words, punctuations,numbers are also removed. Text is converte to lower case. This is our cleaned data.
 Here we are using BiGram model. From the trained data, we extract bigrams and unigrams and map them with highest probabilistic(Frequency) category and save them as two seperate databases like unigram-frequency and bigram-frequency. 
 Now the cleaned data would be matched against the unigram and bigram data. After processing the entire sentence/comment we would generate the following. 
@@ -42,6 +45,9 @@ The problem here we are dealing is classification problem where we need to class
 
 > For this purpose we are using **Multinomial Naive Bayes Alogorithm**. 
 
+## Machine Learning:
+
+### Naive Bayes Multinomial model
 **From wikipedia:**
 Naive Bayes Alogorithm is a simple technique for constructing classifiers: models that assign class labels to problem instances, represented as vectors of feature values, where the class labels are drawn from some finite set. There is not a single algorithm for training such classifiers, but a family of algorithms based on a common principle: all naive Bayes classifiers assume that the value of a particular feature is independent of the value of any other feature, given the class variable. For example, a fruit may be considered to be an apple if it is red, round, and about 10 cm in diameter. A naive Bayes classifier considers each of these features to contribute independently to the probability that this fruit is an apple, regardless of any possible correlations between the color, roundness, and diameter features. 
 
@@ -49,5 +55,9 @@ We fit the trained data into the Multinomial NB model and train each sentence/co
 Then we find the accuracy of the model using the validation set splitted ealier.
 Then we find the categories of the test data using the above trained model.
 
-
+## Reference Links:
+https://towardsdatascience.com/social-media-sentiment-analysis-part-ii-bcacca5aaa39  
+https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html  
+https://en.wikipedia.org/wiki/Naive_Bayes_classifier  
+https://en.wikipedia.org/wiki/Tf%E2%80%93idf  
 (4) (PDF) Text Mining: Use of TF-IDF to Examine the Relevance of Words to Documents. Available from: https://www.researchgate.net/publication/326425709_Text_Mining_Use_of_TF-IDF_to_Examine_the_Relevance_of_Words_to_Documents [accessed Sep 15 2020].
