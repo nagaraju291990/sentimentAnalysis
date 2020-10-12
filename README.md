@@ -7,8 +7,15 @@ Training data, each sentence is marked as Positive/Negative/Mixed Feelings/Not-M
 ---
 
 ## How to run?
+
+Result will be saved in result.tsv  
+### For Tamil
 ```
-python3 main-ml-bigram.py -i=tamil_train.tsv -l=tam -d=tamil_uniq_freq.tsv -d2=tamil_bigram_freq.tsv -t=tamil_test\ -\ tamil_test.tsv
+python3 main-ml-bigram.py -i=tamil_train.tsv -l=tam -d=tamil_uniq_freq.tsv -d2=tamil_bigram_freq.tsv -t=tamil_test.tsv
+```
+### For Malayalam
+```
+python3 main-ml-bigram.py -i=malayalam_train.tsv -l=mal -d=malayalam_uniq_freq.tsv -d2=malayalam_bigram_freq.tsv -t=malayalam_test.tsv
 
 ```
 ## Previous Expermients
@@ -17,10 +24,6 @@ python3 main-ml.py -i=train.tsv -t=test.tsv
 python3 main-tam.py 
 python3 main-mal.py
 ```
-
----
-
-Result can be viewed in result.csv respectively.
 
 ## Requirements
 ```
@@ -52,6 +55,6 @@ pip3 install numpy
 * From trained set we find the sentiment analysis of test data.
 * We get values like 0,1,2,3,4 which will be mapped to original labels.
 * Results can be found in result.tsv file.
-
+* Detailed explanation of [algorithm](https://github.com/nagaraju291990/sentimentAnalysis/blob/master/Machine_Learning_Algorith.md).  
 ---
 
